@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <form id="myForm">
+        <input type="file" name="uploadFile">
+        <button type="=sumbit">Upload</button>
+    </form>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        const link = "http://localhost:5001/upload";
+        const form = document.getElementById('myForm');
+        form.addEventListener('submit',upload)
+        
+        async function upload(e){
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const result = await axios.post(link,formData,{
+                headers:{
+                    "Content-Type" : "multipart/form-data"
+                }
+            })
+            console.log(result);
+        }
+    </script>
+</body>
+</html>
